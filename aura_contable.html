@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Contable SRL – Estudio Contable Profesional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --blue: #1a3a6e;
+    --accent: #2563c0;
+    --gold: #c4922a;
+    --gold-light: #e8b84b;
+    --silver: #8a97a8;
+    --light: #f4f6fb;
+    --white: #ffffff;
+    --text: #1e2a3a;
+    --muted: #5a6a7e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(13,27,62,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,146,42,0.25);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; height: 68px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-logo-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900; color: var(--navy);
+    font-family: 'Playfair Display', serif;
+  }
+  .nav-name { color: var(--white); font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.02em; }
+  .nav-name span { color: var(--gold-light); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding-top: 68px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(37,99,192,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(196,146,42,0.1) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto; padding: 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(196,146,42,0.15);
+    border: 1px solid rgba(196,146,42,0.4);
+    color: var(--gold-light);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    font-weight: 900; color: var(--white);
+    line-height: 1.12; margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold-light); }
+  .hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem; line-height: 1.7;
+    margin-bottom: 36px; font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); font-weight: 700; font-size: 0.9rem;
+    padding: 14px 32px; border-radius: 6px; border: none;
+    cursor: pointer; text-decoration: none; letter-spacing: 0.02em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(196,146,42,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,146,42,0.5); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white); font-weight: 600; font-size: 0.9rem;
+    padding: 14px 32px; border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold-light); background: rgba(196,146,42,0.08); }
+
+  /* Hero Logo Visual */
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 50px 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    width: 100%;
+    max-width: 340px;
+  }
+  .logo-card-icon {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; font-weight: 900; color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 40px rgba(196,146,42,0.4);
+  }
+  .logo-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--white); font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .logo-card h2 span { color: var(--gold-light); }
+  .logo-card .tagline { color: var(--silver); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 28px; }
+  .logo-divider { width: 40px; height: 2px; background: var(--gold); margin: 16px auto; border-radius: 2px; }
+  .logo-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .logo-stat { padding: 14px; background: rgba(255,255,255,0.05); border-radius: 10px; }
+  .logo-stat .num { font-size: 1.4rem; font-weight: 700; color: var(--gold-light); font-family: 'Playfair Display', serif; }
+  .logo-stat .lbl { font-size: 0.72rem; color: var(--silver); margin-top: 2px; }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 96px 60px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700; color: var(--navy);
+    line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 560px; }
+
+  /* ── IDENTIDAD / NOSOTROS ── */
+  #nosotros { background: var(--light); }
+  .nosotros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-top: 48px; }
+
+  .mision-card, .vision-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px 32px;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .card-icon { font-size: 28px; margin-bottom: 14px; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+  .card-text { color: var(--muted); line-height: 1.7; font-size: 0.95rem; }
+
+  .mision-vision { display: flex; flex-direction: column; gap: 20px; }
+
+  /* Mapa */
+  .map-section {
+    background: var(--white); border-radius: 16px;
+    padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .map-section h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--navy); margin-bottom: 20px; }
+  .map-visual {
+    background: linear-gradient(135deg, #e8f0fe 0%, #dce9ff 100%);
+    border-radius: 12px;
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+    border: 2px dashed rgba(37,99,192,0.2);
+    position: relative; overflow: hidden;
+  }
+  .map-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(37,99,192,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,192,0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .map-pin { font-size: 36px; position: relative; z-index: 1; }
+  .map-text { font-weight: 600; color: var(--blue); font-size: 0.9rem; position: relative; z-index: 1; }
+  .map-sub { color: var(--muted); font-size: 0.8rem; position: relative; z-index: 1; }
+  .location-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .location-tag {
+    background: var(--light); border: 1px solid rgba(37,99,192,0.15);
+    border-radius: 20px; padding: 5px 14px;
+    font-size: 0.8rem; color: var(--blue); font-weight: 500;
+  }
+
+  /* ── ORGANIGRAMA ── */
+  #organigrama { background: var(--navy); }
+  #organigrama .section-title { color: var(--white); }
+  #organigrama .section-sub { color: rgba(255,255,255,0.55); }
+
+  .org-chart {
+    margin-top: 56px;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .org-top {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 14px; padding: 24px 40px;
+    text-align: center; min-width: 260px;
+    box-shadow: 0 8px 30px rgba(196,146,42,0.35);
+  }
+  .org-top .org-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 800; color: var(--navy); }
+  .org-top .org-role { font-size: 0.78rem; color: rgba(13,27,62,0.7); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+  .org-top .org-title { font-size: 0.9rem; color: var(--navy); font-weight: 700; margin-bottom: 4px; }
+
+  .org-connector {
+    width: 2px; height: 32px;
+    background: rgba(255,255,255,0.2);
+  }
+  .org-h-line {
+    display: flex; align-items: flex-start; justify-content: center;
+    gap: 0; position: relative; width: 100%;
+  }
+  .org-h-line::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 440px; height: 2px;
+    background: rgba(255,255,255,0.2);
+  }
+  .org-branch { display: flex; flex-direction: column; align-items: center; flex: 1; max-width: 220px; }
+  .org-branch-line { width: 2px; height: 32px; background: rgba(255,255,255,0.2); }
+  .org-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 12px; padding: 20px 24px;
+    text-align: center; width: 100%;
+    backdrop-filter: blur(6px);
+  }
+  .org-card .org-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--white); }
+  .org-card .org-role { font-size: 0.75rem; color: var(--gold-light); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+  .org-card .org-title { font-size: 0.83rem; color: rgba(255,255,255,0.8); font-weight: 600; margin-bottom: 4px; }
+  .org-sub-row {
+    display: flex; gap: 24px; justify-content: center;
+    flex-wrap: wrap; margin-top: 40px; width: 100%;
+  }
+  .org-sub-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 16px 20px;
+    text-align: center; min-width: 140px;
+  }
+  .org-sub-card .dept { font-size: 0.78rem; color: var(--silver); font-weight: 500; }
+  .org-sub-card .dept-icon { font-size: 22px; margin-bottom: 6px; }
+
+  /* ── SERVICIOS ── */
+  #servicios { background: var(--white); }
+  .servicios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 52px; }
+  .servicio-card {
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 16px; padding: 32px 28px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .servicio-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .servicio-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: rgba(196,146,42,0.3); }
+  .servicio-card:hover::before { transform: scaleX(1); }
+  .servicio-icon { font-size: 32px; margin-bottom: 16px; }
+  .servicio-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .servicio-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+  .servicio-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+  /* Featured service */
+  .servicio-featured {
+    grid-column: span 3;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    border: none; color: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  }
+  .servicio-featured .servicio-title { color: var(--white); font-size: 1.4rem; }
+  .servicio-featured .servicio-desc { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+  .servicio-featured .servicio-num { color: var(--gold-light); }
+  .servicio-featured::before { background: linear-gradient(90deg, var(--gold-light), var(--gold)); }
+  .featured-visual {
+    background: rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 28px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .balance-chart { display: flex; flex-direction: column; gap: 10px; }
+  .balance-row {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .balance-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); width: 100px; flex-shrink: 0; }
+  .balance-bar-wrap { flex: 1; background: rgba(255,255,255,0.1); border-radius: 4px; height: 10px; overflow: hidden; }
+  .balance-bar { height: 100%; border-radius: 4px; }
+  .balance-val { font-size: 0.78rem; color: var(--gold-light); font-weight: 600; width: 60px; text-align: right; flex-shrink: 0; }
+  .balance-chart-title { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; font-weight: 600; }
+
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .service-tag {
+    background: rgba(196,146,42,0.15); border: 1px solid rgba(196,146,42,0.35);
+    color: var(--gold-light); font-size: 0.75rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* ── CONTACTO ── */
+  #contacto { background: var(--light); }
+  .contacto-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; margin-top: 48px; align-items: start; }
+  .contacto-info { display: flex; flex-direction: column; gap: 24px; }
+  .info-item { display: flex; gap: 16px; align-items: flex-start; }
+  .info-icon {
+    width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+    background: var(--navy); display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .info-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+  .info-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+  /* Form */
+  .form-card {
+    background: var(--white); border-radius: 18px;
+    padding: 40px 36px; box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+  }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 6px; font-weight: 700; }
+  .form-sub { color: var(--muted); font-size: 0.875rem; margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 6px; letter-spacing: 0.03em; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    border-radius: 8px; font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text); background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37,99,192,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: var(--white); font-weight: 700; font-size: 0.95rem;
+    border: none; border-radius: 8px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.03em; transition: opacity 0.2s, transform 0.2s;
+    margin-top: 4px;
+  }
+  .form-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+  .form-success {
+    display: none;
+    background: #e8f5e9; border: 1px solid #a5d6a7;
+    border-radius: 10px; padding: 16px 20px;
+    color: #2e7d32; font-weight: 600; font-size: 0.9rem;
+    text-align: center; margin-top: 16px;
+  }
+
+  /* ── ENCUESTA ── */
+  #encuesta { background: var(--white); }
+  .encuesta-card {
+    background: var(--light); border-radius: 18px; padding: 48px;
+    max-width: 720px; margin: 48px auto 0;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .encuesta-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 8px; font-weight: 700; }
+  .encuesta-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 32px; }
+  .stars-group { margin-bottom: 24px; }
+  .stars-label { font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .stars { display: flex; gap: 6px; }
+  .star {
+    font-size: 28px; cursor: pointer; color: #ddd;
+    transition: color 0.15s, transform 0.15s;
+    user-select: none;
+  }
+  .star.active, .star:hover { color: var(--gold); transform: scale(1.15); }
+  .radio-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .radio-option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 8px;
+    border: 1.5px solid rgba(0,0,0,0.09);
+    cursor: pointer; background: var(--white);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .radio-option:hover { border-color: var(--accent); background: rgba(37,99,192,0.03); }
+  .radio-option input[type="radio"] { accent-color: var(--accent); width: 16px; height: 16px; }
+  .radio-option span { font-size: 0.9rem; color: var(--text); }
+  .encuesta-submit {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); font-weight: 700; font-size: 0.95rem;
+    padding: 13px 32px; border: none; border-radius: 8px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(196,146,42,0.3);
+  }
+  .encuesta-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,146,42,0.4); }
+  .encuesta-success {
+    display: none;
+    text-align: center; padding: 24px;
+    color: var(--navy); font-weight: 600;
+  }
+  .encuesta-success .big-check { font-size: 48px; display: block; margin-bottom: 10px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 56px 60px 36px;
+    border-top: 1px solid rgba(196,146,42,0.2);
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand .brand-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); font-weight: 700; margin-bottom: 10px; }
+  .footer-brand .brand-name span { color: var(--gold-light); }
+  .footer-brand p { color: rgba(255,255,255,0.45); font-size: 0.875rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 { color: var(--gold-light); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.55); font-size: 0.875rem; text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 0.82rem; }
+  .qr-badge {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 10px 16px;
+  }
+  .qr-placeholder {
+    width: 40px; height: 40px;
+    background: var(--white); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .qr-text { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+  .qr-url { font-size: 0.8rem; color: var(--gold-light); font-weight: 600; }
+
+  /* ── SCROLL ANIMATION ── */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px; }
+    .hero-visual { display: none; }
+    section { padding: 64px 24px; }
+    .nosotros-grid, .contacto-grid, .servicios-grid { grid-template-columns: 1fr; }
+    .servicio-featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer { padding: 40px 24px 28px; }
+    .org-h-line::before { width: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">A</div>
+    <div class="nav-name"><span>Aura</span> Contable SRL</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#organigrama">Equipo</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#encuesta">Encuesta</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">✦ Estudio Contable Profesional · Buenos Aires</div>
+      <h1>Claridad financiera para su <em>empresa</em></h1>
+      <p>Outsourcing contable, auditoría y estados financieros bajo normas RT vigentes. Soluciones profesionales para Pymes y grandes empresas en Argentina.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-primary">Solicitar Consulta</a>
+        <a href="#servicios" class="btn-outline">Ver Servicios</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="logo-card">
+        <div class="logo-card-icon">A</div>
+        <h2><span>Aura</span> Contable</h2>
+        <div class="tagline">SRL · Est. 2025</div>
+        <div class="logo-divider"></div>
+        <div class="logo-stats">
+          <div class="logo-stat">
+            <div class="num">RT</div>
+            <div class="lbl">Normas vigentes</div>
+          </div>
+          <div class="logo-stat">
+            <div class="num">100%</div>
+            <div class="lbl">Digital</div>
+          </div>
+          <div class="logo-stat">
+            <div class="num">Pymes</div>
+            <div class="lbl">Especialidad</div>
+          </div>
+          <div class="logo-stat">
+            <div class="num">BsAs</div>
+            <div class="lbl">Cobertura</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="section-inner">
+    <div class="section-label">Identidad Institucional</div>
+    <h2 class="section-title">Quiénes somos</h2>
+    <p class="section-sub">Estudio contable orientado a la externalización profesional de servicios contables, impositivos y de auditoría para empresas en crecimiento.</p>
+
+    <div class="nosotros-grid fade-up">
+      <!-- Misión + Visión -->
+      <div class="mision-vision">
+        <div class="mision-card">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">Misión</div>
+          <div class="card-text">Brindar servicios contables y de auditoría de alta calidad a Pymes y grandes empresas, optimizando su gestión financiera mediante la externalización de su departamento contable bajo estrictas normas profesionales vigentes (RT). Contribuimos al crecimiento sostenible de nuestros clientes con precisión técnica, confidencialidad y compromiso ético.</div>
+        </div>
+        <div class="vision-card">
+          <div class="card-icon">🔭</div>
+          <div class="card-title">Visión</div>
+          <div class="card-text">Ser el estudio contable de referencia en el área metropolitana de Buenos Aires para la gestión digital integral de Pymes, reconocido por la calidad técnica de nuestros informes, la innovación en herramientas digitales y la solidez de nuestras relaciones profesionales a largo plazo.</div>
+        </div>
+        <div style="background:var(--white);border-radius:14px;padding:24px 28px;border:1px solid rgba(0,0,0,0.08);">
+          <div class="card-icon">📋</div>
+          <div class="card-title">Tipo de Estudio</div>
+          <div class="card-text" style="margin-bottom:14px;">Estudio contable integral de tipo <strong>impositivo, de auditoría y outsourcing contable</strong>, especializado en Pymes de los rubros comercio, servicios y producción.</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="background:var(--light);border:1px solid rgba(37,99,192,0.15);border-radius:20px;padding:4px 12px;font-size:0.78rem;color:var(--blue);font-weight:600;">Impositivo</span>
+            <span style="background:var(--light);border:1px solid rgba(37,99,192,0.15);border-radius:20px;padding:4px 12px;font-size:0.78rem;color:var(--blue);font-weight:600;">Auditoría</span>
+            <span style="background:var(--light);border:1px solid rgba(37,99,192,0.15);border-radius:20px;padding:4px 12px;font-size:0.78rem;color:var(--blue);font-weight:600;">Outsourcing Contable</span>
+            <span style="background:var(--light);border:1px solid rgba(37,99,192,0.15);border-radius:20px;padding:4px 12px;font-size:0.78rem;color:var(--blue);font-weight:600;">Estados Financieros</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa + Historia -->
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div class="map-section">
+          <h3>📍 Área Geográfica de Influencia</h3>
+          <div class="map-visual">
+            <div class="map-pin">📍</div>
+            <div class="map-text">Buenos Aires, Argentina</div>
+            <div class="map-sub">Zona de cobertura: AMBA y Gran Buenos Aires</div>
+          </div>
+          <div class="location-tags" style="margin-top:16px;">
+            <span class="location-tag">📍 Ciudad Autónoma de Bs. As.</span>
+            <span class="location-tag">🏙️ Gran Buenos Aires</span>
+            <span class="location-tag">💻 Clientes Remotos – Todo el País</span>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:14px;padding:28px;border:1px solid rgba(0,0,0,0.08);">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">Historia del Estudio</div>
+          <div class="card-text">Aura Contable SRL nació de la convicción de que las Pymes argentinas merecen acceso a servicios contables de primer nivel sin la carga de mantener un departamento interno. Fundada por dos contadores públicos formados en la <strong>UNT</strong>, el estudio combina rigor técnico con tecnología digital para ofrecer soluciones ágiles, transparentes y adaptadas a la realidad económica nacional.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIGRAMA -->
+<section id="organigrama">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--gold-light);">Estructura Profesional</div>
+    <h2 class="section-title">Organigrama del Estudio</h2>
+    <p class="section-sub">Equipo integrado por profesionales en Ciencias Económicas especializados en contabilidad, auditoría y gestión impositiva.</p>
+
+    <div class="org-chart fade-up">
+      <!-- TOP -->
+      <div class="org-top">
+        <div class="org-title">AURA CONTABLE SRL</div>
+        <div class="org-name">Dirección General</div>
+        <div class="org-role">Conducción Ejecutiva del Estudio</div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <!-- H-LINE + SOCIOS -->
+      <div class="org-h-line" style="width:100%;max-width:600px;">
+        <div class="org-branch">
+          <div class="org-branch-line"></div>
+          <div class="org-card">
+            <div class="org-title" style="color:var(--gold-light);">Samuel Pastrana</div>
+            <div class="org-name">Socio Gerente /</div>
+            <div class="org-name">Contador Senior</div>
+            <div class="org-role" style="margin-top:6px;">Outsourcing Contable · Impuestos</div>
+          </div>
+        </div>
+        <div class="org-branch">
+          <div class="org-branch-line"></div>
+          <div class="org-card">
+            <div class="org-title" style="color:var(--gold-light);">Yuliana Contreras</div>
+            <div class="org-name">Socio Gerente /</div>
+            <div class="org-name">Contador Senior</div>
+            <div class="org-role" style="margin-top:6px;">Auditoría · Estados Financieros</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÁREAS -->
+      <div class="org-sub-row">
+        <div class="org-sub-card">
+          <div class="dept-icon">📊</div>
+          <div class="dept" style="color:var(--white);font-weight:600;font-size:0.85rem;">Área Contable</div>
+          <div class="dept">Registros · Conciliaciones</div>
+        </div>
+        <div class="org-sub-card">
+          <div class="dept-icon">🔍</div>
+          <div class="dept" style="color:var(--white);font-weight:600;font-size:0.85rem;">Área de Auditoría</div>
+          <div class="dept">Informes · Certificaciones</div>
+        </div>
+        <div class="org-sub-card">
+          <div class="dept-icon">🏛️</div>
+          <div class="dept" style="color:var(--white);font-weight:600;font-size:0.85rem;">Área Impositiva</div>
+          <div class="dept">AFIP · Ingresos Brutos</div>
+        </div>
+        <div class="org-sub-card">
+          <div class="dept-icon">💼</div>
+          <div class="dept" style="color:var(--white);font-weight:600;font-size:0.85rem;">Atención al Cliente</div>
+          <div class="dept">Consultas · Asesoramiento</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-inner">
+    <div class="section-label">Catálogo Profesional</div>
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <p class="section-sub">Soluciones contables completas bajo normas profesionales vigentes, diseñadas para la realidad de las empresas argentinas.</p>
+
+    <div class="servicios-grid fade-up">
+      <!-- FEATURED: Outsourcing -->
+      <div class="servicio-card servicio-featured">
+        <div>
+          <div class="servicio-icon">🏢</div>
+          <div class="servicio-num">Servicio Principal · 02</div>
+          <div class="servicio-title">Outsourcing Contable y Estados Financieros</div>
+          <div class="servicio-desc">Externalización completa del departamento contable para Pymes y grandes empresas. Registro de operaciones diarias, conciliaciones bancarias y confección de Estados Contables (Balances) bajo normas profesionales vigentes (RT). Emisión de informes de auditoría y certificaciones profesionales.</div>
+          <div class="service-tags">
+            <span class="service-tag">Normas RT</span>
+            <span class="service-tag">Balance General</span>
+            <span class="service-tag">Informe de Auditoría</span>
+            <span class="service-tag">Conciliaciones</span>
+            <span class="service-tag">Certificaciones</span>
+          </div>
+        </div>
+        <div class="featured-visual">
+          <div class="balance-chart-title">📊 Indicadores Financieros – Cliente Tipo</div>
+          <div class="balance-chart">
+            <div class="balance-row">
+              <div class="balance-label">Activo Total</div>
+              <div class="balance-bar-wrap"><div class="balance-bar" style="width:85%;background:linear-gradient(90deg,#2563c0,#60a5fa);"></div></div>
+              <div class="balance-val">$ 2.4M</div>
+            </div>
+            <div class="balance-row">
+              <div class="balance-label">Patrimonio</div>
+              <div class="balance-bar-wrap"><div class="balance-bar" style="width:62%;background:linear-gradient(90deg,var(--gold),var(--gold-light));"></div></div>
+              <div class="balance-val">$ 1.6M</div>
+            </div>
+            <div class="balance-row">
+              <div class="balance-label">Ventas Netas</div>
+              <div class="balance-bar-wrap"><div class="balance-bar" style="width:78%;background:linear-gradient(90deg,#10b981,#34d399);"></div></div>
+              <div class="balance-val">$ 3.1M</div>
+            </div>
+            <div class="balance-row">
+              <div class="balance-label">Resultado</div>
+              <div class="balance-bar-wrap"><div class="balance-bar" style="width:40%;background:linear-gradient(90deg,#f59e0b,#fcd34d);"></div></div>
+              <div class="balance-val">$ 480K</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-icon">📝</div>
+        <div class="servicio-num">Servicio · 01</div>
+        <div class="servicio-title">Liquidación Impositiva Integral</div>
+        <div class="servicio-desc">Gestión completa ante AFIP: IVA, Ganancias, Bienes Personales, Ingresos Brutos e IIBB convenio multilateral. Declaraciones juradas mensuales y anuales con seguimiento permanente de vencimientos.</div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-icon">👥</div>
+        <div class="servicio-num">Servicio · 03</div>
+        <div class="servicio-title">Gestión Laboral y Nómina</div>
+        <div class="servicio-desc">Liquidación de sueldos y jornales, aportes y contribuciones previsionales, altas y bajas en AFIP-ANSES. Gestión de legajos y cumplimiento de la normativa laboral vigente.</div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-icon">🔎</div>
+        <div class="servicio-num">Servicio · 04</div>
+        <div class="servicio-title">Auditoría de Estados Contables</div>
+        <div class="servicio-desc">Emisión de informes de auditoría conforme a normas de auditoría (NA) vigentes. Revisiones limitadas, informes especiales y certificaciones contables para entidades bancarias y organismos públicos.</div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-icon">💡</div>
+        <div class="servicio-num">Servicio · 05</div>
+        <div class="servicio-title">Asesoramiento Financiero y Societario</div>
+        <div class="servicio-desc">Análisis de rentabilidad, flujo de fondos, planificación fiscal y reorganizaciones societarias. Acompañamiento en la toma de decisiones estratégicas con base en información financiera confiable.</div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-icon">🖥️</div>
+        <div class="servicio-num">Servicio · 06</div>
+        <div class="servicio-title">Implementación de Sistemas Contables</div>
+        <div class="servicio-desc">Configuración y capacitación en software de gestión contable (Tango, Bejerman, Colppy). Digitalización de procesos y migración de datos históricos para una transición sin interrupciones.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-inner">
+    <div class="section-label">Consulta Inicial Gratuita</div>
+    <h2 class="section-title">Formulario de Contacto</h2>
+    <p class="section-sub">Complete el formulario y uno de nuestros Contadores Seniors se comunicará dentro de las 24 horas hábiles.</p>
+
+    <div class="contacto-grid fade-up">
+      <div class="contacto-info">
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Dirección</div>
+            <div class="info-value">Buenos Aires, Argentina<br><small style="color:var(--muted);">Atención con turno previo</small></div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📧</div>
+          <div>
+            <div class="info-label">Correo Electrónico</div>
+            <div class="info-value">contacto@auracontable.com.ar</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Teléfono / WhatsApp</div>
+            <div class="info-value">+54 11 XXXX-XXXX</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label">Horario de Atención</div>
+            <div class="info-value">Lunes a Viernes: 9:00–18:00 hs.</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:20px;background:var(--white);border-radius:12px;border:1px solid rgba(0,0,0,0.08);">
+          <div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Web</div>
+          <div style="color:var(--accent);font-weight:600;font-size:0.9rem;">www.auracontable.com.ar</div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-title">Solicitar Consulta Inicial</div>
+        <div class="form-sub">Cuéntenos sobre su empresa y el servicio que necesita. La primera consulta es sin cargo.</div>
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre *</label>
+              <input type="text" placeholder="Ej: María García" required>
+            </div>
+            <div class="form-group">
+              <label>Apellido *</label>
+              <input type="text" placeholder="Ej: Rodríguez" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Correo Electrónico *</label>
+              <input type="email" placeholder="empresa@mail.com" required>
+            </div>
+            <div class="form-group">
+              <label>Teléfono / WhatsApp</label>
+              <input type="tel" placeholder="+54 11 XXXX-XXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Razón Social / Empresa *</label>
+            <input type="text" placeholder="Nombre de su empresa o emprendimiento" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tipo de Empresa</label>
+              <select>
+                <option value="">Seleccionar...</option>
+                <option>Persona Física / Monotributo</option>
+                <option>SRL / SA (Pyme)</option>
+                <option>Gran Empresa</option>
+                <option>Cooperativa / Asociación</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Servicio de Interés *</label>
+              <select required>
+                <option value="">Seleccionar...</option>
+                <option>Outsourcing Contable Completo</option>
+                <option>Liquidación Impositiva</option>
+                <option>Auditoría de Estados Contables</option>
+                <option>Gestión Laboral / Nómina</option>
+                <option>Asesoramiento Financiero</option>
+                <option>Sistemas Contables</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Descripción de su Consulta *</label>
+            <textarea placeholder="Describa brevemente la situación de su empresa y el servicio que necesita..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">✉ Enviar Consulta</button>
+          <div class="form-success" id="formSuccess">✅ ¡Consulta recibida con éxito! Nos comunicaremos dentro de las 24 horas hábiles.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENCUESTA -->
+<section id="encuesta" style="background:var(--light);">
+  <div class="section-inner">
+    <div class="section-label">Mejora Continua</div>
+    <h2 class="section-title" style="text-align:center;">Encuesta de Satisfacción</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto;">Su opinión es fundamental para mejorar la calidad de nuestros servicios profesionales.</p>
+
+    <div class="encuesta-card fade-up">
+      <div class="encuesta-title">¿Cómo fue su experiencia con Aura Contable?</div>
+      <div class="encuesta-sub">Complete la encuesta en menos de 2 minutos. Sus respuestas son confidenciales y nos ayudan a brindar un mejor servicio.</div>
+
+      <form id="encuestaForm" onsubmit="submitEncuesta(event)">
+        <!-- Pregunta 1 – Stars -->
+        <div class="stars-group">
+          <div class="stars-label">1. ¿Cómo calificaría la calidad técnica del servicio recibido?</div>
+          <div class="stars" id="stars1" data-val="0">
+            <span class="star" onclick="setStars('stars1',1)">★</span>
+            <span class="star" onclick="setStars('stars1',2)">★</span>
+            <span class="star" onclick="setStars('stars1',3)">★</span>
+            <span class="star" onclick="setStars('stars1',4)">★</span>
+            <span class="star" onclick="setStars('stars1',5)">★</span>
+          </div>
+        </div>
+
+        <!-- Pregunta 2 – Stars -->
+        <div class="stars-group">
+          <div class="stars-label">2. ¿Cómo evalúa la comunicación y disponibilidad del equipo profesional?</div>
+          <div class="stars" id="stars2" data-val="0">
+            <span class="star" onclick="setStars('stars2',1)">★</span>
+            <span class="star" onclick="setStars('stars2',2)">★</span>
+            <span class="star" onclick="setStars('stars2',3)">★</span>
+            <span class="star" onclick="setStars('stars2',4)">★</span>
+            <span class="star" onclick="setStars('stars2',5)">★</span>
+          </div>
+        </div>
+
+        <!-- Pregunta 3 – Radio -->
+        <div class="form-group">
+          <div class="stars-label" style="margin-bottom:12px;">3. ¿En qué plazo recibió la primera respuesta a su consulta?</div>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="plazo" value="mismo-dia"> <span>El mismo día hábil</span></label>
+            <label class="radio-option"><input type="radio" name="plazo" value="24hs"> <span>Dentro de las 24 horas hábiles</span></label>
+            <label class="radio-option"><input type="radio" name="plazo" value="48hs"> <span>Entre 24 y 48 horas hábiles</span></label>
+            <label class="radio-option"><input type="radio" name="plazo" value="mas"> <span>Más de 48 horas</span></label>
+          </div>
+        </div>
+
+        <!-- Pregunta 4 – Radio -->
+        <div class="form-group">
+          <div class="stars-label" style="margin-bottom:12px;">4. ¿Los servicios contratados se ajustaron a las necesidades de su empresa?</div>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="ajuste" value="totalmente"> <span>Totalmente, superó mis expectativas</span></label>
+            <label class="radio-option"><input type="radio" name="ajuste" value="mayormente"> <span>Mayormente sí, con pequeñas oportunidades de mejora</span></label>
+            <label class="radio-option"><input type="radio" name="ajuste" value="parcialmente"> <span>Parcialmente, algunos aspectos deben mejorar</span></label>
+            <label class="radio-option"><input type="radio" name="ajuste" value="no"> <span>No se ajustaron a mis necesidades</span></label>
+          </div>
+        </div>
+
+        <!-- Pregunta 5 – Stars -->
+        <div class="stars-group">
+          <div class="stars-label">5. ¿Recomendaría Aura Contable a otra empresa o colega?</div>
+          <div class="stars" id="stars3" data-val="0">
+            <span class="star" onclick="setStars('stars3',1)">★</span>
+            <span class="star" onclick="setStars('stars3',2)">★</span>
+            <span class="star" onclick="setStars('stars3',3)">★</span>
+            <span class="star" onclick="setStars('stars3',4)">★</span>
+            <span class="star" onclick="setStars('stars3',5)">★</span>
+          </div>
+        </div>
+
+        <!-- Pregunta 6 – Radio -->
+        <div class="form-group">
+          <div class="stars-label" style="margin-bottom:12px;">6. ¿Qué aspecto valora más de nuestro estudio?</div>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="aspecto" value="tecnico"> <span>Calidad técnica y precisión profesional</span></label>
+            <label class="radio-option"><input type="radio" name="aspecto" value="comunicacion"> <span>Comunicación clara y accesible</span></label>
+            <label class="radio-option"><input type="radio" name="aspecto" value="digital"> <span>Eficiencia digital y tecnología empleada</span></label>
+            <label class="radio-option"><input type="radio" name="aspecto" value="precio"> <span>Relación calidad-precio</span></label>
+          </div>
+        </div>
+
+        <!-- Pregunta 7 – Texto -->
+        <div class="form-group">
+          <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:8px;">7. ¿Qué mejora sugeriría para optimizar nuestros servicios? (opcional)</label>
+          <textarea style="width:100%;padding:12px 14px;border:1.5px solid rgba(0,0,0,0.1);border-radius:8px;font-size:0.9rem;font-family:'DM Sans',sans-serif;resize:vertical;min-height:80px;outline:none;" placeholder="Sus sugerencias son muy valiosas para nosotros..."></textarea>
+        </div>
+
+        <button type="submit" class="encuesta-submit">Enviar Encuesta ✓</button>
+        <div class="encuesta-success" id="encuestaSuccess">
+          <span class="big-check">🏆</span>
+          <strong>¡Gracias por su tiempo!</strong><br>
+          Su opinión contribuye a la mejora continua de nuestros servicios profesionales.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name"><span>Aura</span> Contable SRL</div>
+        <p>Estudio contable especializado en outsourcing contable, auditoría y estados financieros. Profesionalismo y tecnología al servicio de su empresa.</p>
+        <div style="margin-top:20px;display:flex;gap:10px;">
+          <div style="width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;">in</div>
+          <div style="width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;">📱</div>
+          <div style="width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;">✉</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Outsourcing Contable</a></li>
+          <li><a href="#servicios">Liquidación Impositiva</a></li>
+          <li><a href="#servicios">Auditoría</a></li>
+          <li><a href="#servicios">Gestión Laboral</a></li>
+          <li><a href="#servicios">Asesoramiento Financiero</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Estudio</h4>
+        <ul>
+          <li><a href="#nosotros">Misión y Visión</a></li>
+          <li><a href="#organigrama">Nuestro Equipo</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#encuesta">Encuesta</a></li>
+          <li><a href="#">Política de Privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aura Contable SRL · Samuel Pastrana & Yuliana Contreras · Matriculados CPCE · Buenos Aires</p>
+      <div class="qr-badge">
+        <div class="qr-placeholder">⬛</div>
+        <div>
+          <div class="qr-text">Escaneá para visitarnos</div>
+          <div class="qr-url">www.auracontable.com.ar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Stars
+  function setStars(id, val) {
+    const container = document.getElementById(id);
+    container.dataset.val = val;
+    const stars = container.querySelectorAll('.star');
+    stars.forEach((s, i) => {
+      s.classList.toggle('active', i < val);
+    });
+  }
+
+  // Contact form
+  function submitContact(e) {
+    e.preventDefault();
+    document.getElementById('formSuccess').style.display = 'block';
+    e.target.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+  }
+
+  // Encuesta
+  function submitEncuesta(e) {
+    e.preventDefault();
+    document.getElementById('encuestaSuccess').style.display = 'block';
+    e.target.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+    e.target.querySelector('.encuesta-submit').style.display = 'none';
+  }
+
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
