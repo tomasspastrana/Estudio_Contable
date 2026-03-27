@@ -9,6 +9,13 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("p5UjPHakIpnXrJD2s"); // Reemplazar con tu Public Key de EmailJS
+    })();
+  </script>
   <style>
     :root {
       --navy: #0d1b3e;
@@ -1934,20 +1941,23 @@
             profesional.</div>
           <form id="contactForm" onsubmit="enviarContacto(event)">
             <div class="form-row">
-              <div class="fg"><label>Nombre *</label><input type="text" placeholder="Ej: María" required></div>
-              <div class="fg"><label>Apellido *</label><input type="text" placeholder="Ej: García" required></div>
+              <div class="fg"><label>Nombre *</label><input type="text" name="nombre" placeholder="Ej: María" required>
+              </div>
+              <div class="fg"><label>Apellido *</label><input type="text" name="apellido" placeholder="Ej: García"
+                  required></div>
             </div>
             <div class="form-row">
-              <div class="fg"><label>Correo Electrónico *</label><input type="email" placeholder="empresa@mail.com"
-                  required></div>
-              <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+54 387 XXX-XXXX"></div>
+              <div class="fg"><label>Correo Electrónico *</label><input type="email" name="email"
+                  placeholder="empresa@mail.com" required></div>
+              <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" name="telefono"
+                  placeholder="+54 387 XXX-XXXX"></div>
             </div>
-            <div class="fg"><label>Razón Social / Empresa *</label><input type="text"
+            <div class="fg"><label>Razón Social / Empresa *</label><input type="text" name="empresa"
                 placeholder="Nombre de su empresa o emprendimiento" required></div>
             <div class="form-row">
               <div class="fg">
                 <label>Tipo de Empresa</label>
-                <select>
+                <select name="tipo_empresa">
                   <option value="">Seleccionar...</option>
                   <option>Monotributista / Autónomo</option>
                   <option>SAS / SRL / SA (Pyme)</option>
@@ -1958,7 +1968,7 @@
               </div>
               <div class="fg">
                 <label>Servicio de Interés *</label>
-                <select required>
+                <select name="servicio" required>
                   <option value="">Seleccionar...</option>
                   <option>Outsourcing Contable Completo</option>
                   <option>Liquidación Impositiva AFIP</option>
@@ -1970,7 +1980,7 @@
                 </select>
               </div>
             </div>
-            <div class="fg"><label>Descripción de su Consulta *</label><textarea
+            <div class="fg"><label>Descripción de su Consulta *</label><textarea name="mensaje"
                 placeholder="Describa brevemente la situación de su empresa y lo que necesita..." required></textarea>
             </div>
             <button type="submit" class="form-submit">✉ Enviar Consulta</button>
@@ -2069,7 +2079,8 @@
           </div>
           <div class="sq">
             <span class="sq-label">8. ¿Qué mejora sugeriría para optimizar nuestros servicios? (opcional)</span>
-            <textarea class="enc-textarea" placeholder="Sus sugerencias son muy valiosas para nosotros..."></textarea>
+            <textarea class="enc-textarea" name="sugerencia"
+              placeholder="Sus sugerencias son muy valiosas para nosotros..."></textarea>
           </div>
           <button type="submit" class="enc-submit">Enviar Encuesta ✓</button>
           <div class="enc-ok" id="encOK">
@@ -2141,22 +2152,74 @@
   </footer>
 
   <script>
+    // ── Configuración EmailJS ──
+    // Reemplazar estos valores con los de tu cuenta de EmailJS (https://www.emailjs.com/)
+    const EMAILJS_SERVICE_ID = "service_2m39e7o";
+    const EMAILJS_TEMPLATE_CONTACTO = "template_jp6613o";
+    const EMAILJS_TEMPLATE_ENCUESTA = "template_b6mqldd";
+
     function setStar(id, val) {
       const c = document.getElementById(id);
       c.dataset.v = val;
       c.querySelectorAll('.star').forEach((s, i) => s.classList.toggle('on', i < val));
     }
+
     function enviarContacto(e) {
       e.preventDefault();
-      e.target.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
-      document.getElementById('formOK').style.display = 'block';
+      const form = e.target;
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = '⏳ Enviando...';
+      btn.disabled = true;
+
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CONTACTO, form)
+        .then(function () {
+          form.querySelectorAll('input,select,textarea,button').forEach(function (el) { el.disabled = true; });
+          document.getElementById('formOK').style.display = 'block';
+        })
+        .catch(function (err) {
+          btn.textContent = '✉ Enviar Consulta';
+          btn.disabled = false;
+          alert('Error al enviar el formulario. Por favor, intente nuevamente o contáctenos por teléfono.');
+          console.error('EmailJS error (contacto):', err);
+        });
     }
+
     function enviarEncuesta(e) {
       e.preventDefault();
-      e.target.querySelectorAll('input,textarea,button').forEach(el => el.disabled = true);
-      e.target.querySelector('.enc-submit').style.display = 'none';
-      document.getElementById('encOK').style.display = 'block';
+      var form = e.target;
+      var btn = form.querySelector('.enc-submit');
+      btn.textContent = '⏳ Enviando...';
+      btn.disabled = true;
+
+      var plazoEl = form.querySelector('input[name="plazo"]:checked');
+      var ajusteEl = form.querySelector('input[name="ajuste"]:checked');
+      var aspectoEl = form.querySelector('input[name="aspecto"]:checked');
+
+      var params = {
+        calidad_tecnica: document.getElementById('s1').dataset.v,
+        comunicacion_equipo: document.getElementById('s2').dataset.v,
+        plazo_respuesta: plazoEl ? plazoEl.value : 'Sin respuesta',
+        ajuste_necesidades: ajusteEl ? ajusteEl.value : 'Sin respuesta',
+        info_clara: document.getElementById('s3').dataset.v,
+        aspecto_valorado: aspectoEl ? aspectoEl.value : 'Sin respuesta',
+        recomendacion: document.getElementById('s4').dataset.v,
+        sugerencia: form.querySelector('textarea[name="sugerencia"]').value || 'Sin sugerencias'
+      };
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ENCUESTA, params)
+        .then(function () {
+          form.querySelectorAll('input,textarea,button').forEach(function (el) { el.disabled = true; });
+          btn.style.display = 'none';
+          document.getElementById('encOK').style.display = 'block';
+        })
+        .catch(function (err) {
+          btn.textContent = 'Enviar Encuesta ✓';
+          btn.disabled = false;
+          alert('Error al enviar la encuesta. Por favor, intente nuevamente.');
+          console.error('EmailJS error (encuesta):', err);
+        });
     }
+
     const obs = new IntersectionObserver(entries => {
       entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('vis'); });
     }, { threshold: 0.08 });
