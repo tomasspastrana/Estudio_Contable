@@ -2174,6 +2174,7 @@
       emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CONTACTO, form)
         .then(function () {
           form.querySelectorAll('input,select,textarea,button').forEach(function (el) { el.disabled = true; });
+          btn.style.display = 'none';
           document.getElementById('formOK').style.display = 'block';
         })
         .catch(function (err) {
